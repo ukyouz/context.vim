@@ -28,6 +28,9 @@ function! context#popup#get_context() abort
         let line_number += 1
 
         let [level, indent] = g:context.Indent(line_number) " -1 for invalid lines
+        if indent == 0
+            return [[], 0]
+        endif
         if indent < 0
             call context#util#echof('negative indent', line_number)
             return [[], 0]
